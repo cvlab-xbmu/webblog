@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "title": "",
+      "columnId": ""
+    }
+  ],
+  "posts":[
+    {
+        "postId":"",
+        "title":"",
+        "subtitle":"",
+        "author":"",
+        "timestamp":""
+    }
+  ],
+  "postBindColumns":
+}
