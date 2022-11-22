@@ -7,9 +7,9 @@ const imageSrc = [
 ];
 export const Carouser = () => {
   return (
-    <Carousel className="my-3 aspect-video">
+    <Carousel className="my-3 aspect-video" autoPlay>
       {imageSrc.map((src, index) => (
-        <img src={src} key={index} className="object-cover" />
+        <img src={src} key={index} className="object-cover" alt="" />
       ))}
     </Carousel>
   );

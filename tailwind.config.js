@@ -17,5 +17,6 @@ module.exports = {
       },
     },
   },
+  safelist: ["aspect-4/1", "aspect-5/2"],
   plugins: [require("@tailwindcss/typography")],
 };

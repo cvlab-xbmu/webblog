@@ -7,9 +7,12 @@ import { NewPosts } from "@/components/NewPosts";
 import { ProjectCard } from "@/components/ProjectCard";
 import { PublishList } from "@/components/PublishList";
 import { TeamIntroduction } from "@/components/TeamCard";
+import { printConsoleBanner } from "@/utils/console-banner";
 import Head from "next/head";
+import { HotPosts } from "@/components/HotPosts";
 
 export const HomePage = () => {
+  printConsoleBanner();
   return (
     <div className="">
       <Head>
@@ -19,11 +22,11 @@ export const HomePage = () => {
       </Head>
       <NavLanding aspect="screen" />
       <Main>
-        <Headline />
+        <Headline title={"2022璃语东西——国际当代玻璃艺术展"} url={"/"} citation={"经第75届联合国大会批准，2022年被定为联合国国际玻璃年。恰逢此次机遇，为了更好地推动中国当代玻璃艺术文化发展，向世界讲好“中国故事”，中国工艺美术学会、中国硅酸盐学会决定联合举办“2022璃语东西——国际当代玻璃艺术论坛暨展览”活动。展览倡导创新精神，注重学术性、艺术性、思想性，以“玻璃艺术的过去、现在与未来”为学术主题。"} />
         <Row>
           <Col numerator={1} denominator={2}>
             <Carouser />
-            <NewPosts />
+            <HotPosts />
           </Col>
           <Col numerator={1} denominator={2}>
             <NewPosts />

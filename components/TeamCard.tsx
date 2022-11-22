@@ -31,19 +31,17 @@ export const TeamIntroduction = () => {
       </div>
       <Divider />
       <div className="md:flex flex-wrap justify-center my-10">
-        {Array(12).fill(
-          <div className="flex flex-col justify-center basis-1/4 mx-7 md:mx-auto my-2 p-5">
-            <Avatar size={120} className="shrink-0 mx-auto">
-              <img alt="avatar" src="https://picd.zhimg.com/v2-5d1f02a327b31694b8ae9214e6a109af_r.jpg" />
-            </Avatar>
-            <h3 className="text-lg mx-auto my-2">季羡林</h3>
-            <p>
-              {
-                '中国山东省聊城市临清人，字希逋，又字齐奘。民盟盟员、中共党员 。国际著名东方学大师、语言学家、文学家、国学家、佛学家、史学家'
-              }
-            </p>
-          </div>
-        )}
+        {Array(8).fill({
+          title: "季羡林",
+          avatar: "https://picd.zhimg.com/v2-5d1f02a327b31694b8ae9214e6a109af_r.jpg",
+          introduction: '国际著名东方学大师、语言学家、文学家、国学家、佛学家、史学家'
+        }).map((item, index) => <div className="flex flex-col justify-center basis-1/4 mx-7 md:mx-auto my-2 p-5" key={`team-member-${index}`}>
+          <Avatar size={120} className="shrink-0 mx-auto">
+            <img alt="avatar" src={item.avatar} />
+          </Avatar>
+          <h3 className="text-lg mx-auto my-2">{item.title}</h3>
+          <p>{item.introduction}</p>
+        </div>)}
       </div>
     </div>
   );

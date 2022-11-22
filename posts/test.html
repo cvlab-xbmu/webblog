@@ -1,204 +1,480 @@
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-  <!-- Multi-Lingual -->
-
-  <p>
-    “Avoiding success at all cost” is the informal motto behinds
-    <a href="https://www.haskell.org/">Haskell</a>. It could be parenthesized in
-    two ways, either “Avoiding (success at all cost)” or “(Avoiding sucess) (at
-    all cost)”.
-  </p>
-
-  <p>
-    I’m not going to interpret them directly but rather to share some thoughts
-    on “the success vs. costs” basing on my very own understanding and
-    experience.
-  </p>
-
-  <h3 id="the-success-vs-cost-of-language-design">
-    The success vs. cost of language design<a
-      class="anchorjs-link"
-      href="#the-success-vs-cost-of-language-design"
-      aria-label="Anchor link for: the success vs cost of language design"
-      data-anchorjs-icon=""
-      style="
-        font-family: anchorjs-icons;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        padding-left: 0.375em;
-      "
-    ></a>
-  </h3>
-
-  <p>
-    There’re always trade offs (or compromises) in any software design, and
-    programming language design has no exceptions.
-  </p>
-
-  <p>
-    In other words, all language design decision that made them “successful”
-    i.e. being popular and widely-used in industry or education for some
-    reasons, all comes with their own “costs”: being unsafe, limited
-    expressiveness, or having bad performance, etc.
-  </p>
-
-  <p>
-    Whether or not the “cost” is a problem really depends on scenarios, or their
-    goals. For instances, Python/JavaScript are both very expressive and
-    beginner-friendly by being dynamically-typed, sacrifing the type safety and
-    performance. Java, in constrast, uses a much safer and optimization-friendly
-    type system but being much less expressive. Another typicial comparison
-    would be memory management in programming languages, where languages that
-    are “managed” (by either ARC or Gabage Collector) could be much easier and
-    safer (in terms of memory) for most programmers but also considerred slower
-    than languages that are “closer to the metal”.
-  </p>
-
-  <p>
-    None of these “costs”, or “differences”, really prevent them from being
-    immortally popular.
-  </p>
-
-  <p>
-    For Haskell, the story becomes quite different: being research-oriented
-    means the goal of this language is to pursue some “ultimate” things: the
-    “ultimate” simplicity of intermediate representation, the “ultimate” type
-    system where safety and expressiveness can coexist, the “ultimate”
-    compilation speed and runtime performance, the “ultimate” concise and
-    elegant concrete syntax, the “ultimate”…I don’t know. But it has to be some
-    “ultimate” things that is very difficult, probably endless and impossible,
-    to achieve.
-  </p>
-
-  <p>
-    This, as a result, made all language decisions in Haskell became very hard
-    and slow, because <strong>almost nothing can be scarified</strong>. That’s
-    why Haskell insisted to be lazy to “guard” the purity regardless of some
-    problems of being “call-by-need”; a decent IO mechanisms is missing in the
-    first 4 yrs after the project’s start until P Walder found <em>Monad</em>;
-    and the <em>Type Class</em>, which is first proposed in P Walder’s 1989
-    paper, spent yrs long to implement and popularize.
-  </p>
-
-  <p>
-    As a side note though, it doesn’t mean there is no compromise in Haskell at
-    all. It’s just as minimized as it could be during its progress. When one
-    audience asking why we have Haskell and OCaml, which’re quite similar in
-    very high level, both survived, SPJ replies:
-  </p>
-
-  <blockquote>
-    <p>There’s just a different set of compromises.</p>
-  </blockquote>
-
-  <h3 id="the-success-vs-cost-of-language-design-process">
-    The success vs. cost of language design process<a
-      class="anchorjs-link"
-      href="#the-success-vs-cost-of-language-design-process"
-      aria-label="Anchor link for: the success vs cost of language design process"
-      data-anchorjs-icon=""
-      style="
-        font-family: anchorjs-icons;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        padding-left: 0.375em;
-      "
-    ></a>
-  </h3>
-
-  <p>
-    Another common but extremely controversial (if not the most) topics of
-    programming language design is about its design process: Would you prefer
-    dictatorship or a committee (in other words, a dictatorship of many?)? Would
-    you prefer being proprietary or standardized? In which form would you write
-    the standards, in human nature language, pseudo code, or formal semantics?
-    How many and how frequently breaking changes dare you make? Would you let
-    open source community involve in?
-  </p>
-
-  <p>
-    Again, I think there is no THE answer for all those questions. Majority of
-    popular programming languages came and are still on going with very
-    different paths.
-  </p>
-
-  <p>
-    Python, whose creater, Guido van Rossum, known as the “Benevolent Dictator
-    For Life” (BDFL), i.e. good kind of dictator, still play the central role
-    (until July 2018) of the Python’s development after Python getting popular
-    and adapt a open source and community-based development model. This factor
-    direcly contribute to the fact that Python 3, as a breaking (not completely
-    backward-compatible and not easy to port) but good (in terms of language
-    design and consistency) revision of the language can still be landed,
-    despite of many communities’ pressures. There’re many language (Ruby, Perl,
-    Elm) also choose to follow this route.
-  </p>
-
-  <p>
-    JavaScript, widely known as being created by Brendan Eich in 10 days, in
-    comparision, quickly involved into a committee (TC39) and standardized
-    (ECMAScript) language due to both the open nature of the Web and fast
-    adoption of itself. But Brendan, as the creater, wasn’t even powerful enough
-    to push the committee landing ES4, which is also a breaking but much better
-    revision, but ended up with the ES5 (Harmony), a backward-compatible, yet
-    much less ambitious version due to many political “fights” between different
-    parties (e.g. Mozilla, Microsoft, Yahoo etc.) thus the history wasn’t
-    changed. Even the latest rising and yearly releasing of the “modern”
-    JavaScript (ES6 or ES2015, 2016, 2017…) are mainly driven by the new
-    generation of committee parties (+ Google, Facebook, Airbnb etc.) and still
-    in a very open and standardized way.
-  </p>
-
-  <p>
-    As you can see here, even the history and progress of two rather similar
-    languages can be so different, not to mention more proprietary languages
-    such as Java from Sun/Oracle, C# from Microsoft, OC/Swift from Apple (though
-    the latter was open sourced) or more academia and standardized language like
-    SML and Scheme which both has a standard written in formal semantics.
-  </p>
-
-  <p>
-    So it’s not not obvious that Haskell, also chose its own unique process to
-    suit its unique goal. Although it backs on academia, it chose a rather
-    practical/less-formal approach to define the language, i.e. the compiler
-    implementation over standardization (plus many “formal” fragments among
-    papers though), which is more like C++/OCaml from this point of view. It has
-    a committee, but instead of being very open and conservative, it’s more
-    dictatorial (in terms of average users) and super aggressive in terms of
-    making breaking changes. As a result however, it trained a group of very
-    change-tolerant people in its community…All of these quirks and odds
-    combined works very well and avoid the Haskell “becoming too success too
-    quickly”.
-  </p>
-
-  <h3 id="end-thoughts">
-    End thoughts<a
-      class="anchorjs-link"
-      href="#end-thoughts"
-      aria-label="Anchor link for: end thoughts"
-      data-anchorjs-icon=""
-      style="
-        font-family: anchorjs-icons;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        padding-left: 0.375em;
-      "
-    ></a>
-  </h3>
-
-  <p>
-    To be fair, Haskell has alreay been very “successful” nowdays, in particular
-    academia (for education, sexy type laboratory etc.) but also industry,
-    either being used in real business or being very reputable among programmers
-    (as being both hard and fun).
-  </p>
-
-  <p>
-    I am not confident and qualified to say Haskell is success in the right
-    degree at the right time. But it’s great to see it, after more than 20 and
-    now almost 30 yrs, slowly figure out its very own way, to “Escape from the
-    Ivory Tower”, and keep going beyond.
-  </p>
-</div>
+<td class="con_content">
+  <div id="MyContent">
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 美国卫斯理大学柯文（Paul
+        Cohen）教授指出历史至少有三个层面，他称之为“历史三调”，即经历、事件与神话。①
+        许多历史都具有这样的三重性，而对于各个民族起源的“根基历史”，②
+        这样的特性就更为明显。大韩民族的根基历史：檀君朝鲜与箕子朝鲜，两种传说在韩国数千年的历史上有着许多的纠葛，随着世界大势的变化以及韩国历史的变迁，朝鲜半岛上的民众由崇拜箕子到信奉檀君，背后有着许多深层的原因。尽管当今韩国选择了檀君朝鲜，而摒弃了箕子传说，但深入研究这个问题，不仅可以看到这两种传说的形成或消亡的历程，也可以把握一个民族在形成过程中是如何选择其认为“合适”的历史的。当然，从朝鲜半岛对于箕子朝鲜的选择、崇拜到最后摒弃的历程中，借助这个“异域之眼”，我们可以更清楚地把握传统东亚中华世界的一些基本特性，也可以给我们“从周边看中国”提供一个参考的事例。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <b><font size="3">一、箕子朝鲜与明朝之赐国号</font></b>
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        尽管箕子朝鲜的历史充满重重迷雾，而韩国学术界现在基本否认箕子朝鲜的存在，但中国历史上确有箕子其人，而且具有相当重要的地位。孔子称殷末有“三仁”，而箕子是“三仁”之一，乃殷纣王之叔父。纣王无道，其叔父比干因谏而被杀，微子去之，箕子只好佯狂为奴并遭囚禁。周武王灭商后，把箕子从狱中释放出来，箕子不忍，遂东走朝鲜，建立箕子朝鲜。箕子在朝鲜立国十三年之后，回来朝见周武王，与武王论及治国之道，是为「洪范」。这是历史上箕子的基本事迹，散见于「尚书大传」、「周易」、「逸周书」、「竹书纪年」、「论语」、「史记」、「汉书」等书，具体细节上当然各有参差。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        对于箕子之朝鲜，「史记」之「宋微子世家」、「汉书」之「地理志」等皆有记载。「汉书·地理志」记载更为详细些，其曰：</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        殷道衰，箕子去之朝鲜，教其民以礼义，田蚕织作。乐浪朝鲜民犯禁八条：相杀以当时偿杀；相伤以谷偿；相盗者男没入为其家奴，女子为婢，欲自赎者，人五十万。虽免为民，俗犹羞之，嫁取（娶）无所雠，是以其民终不相盗，无门户之闭，妇人贞信不淫辟。……可贵哉，仁贤之化也！③</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        中国史书强调箕子对于朝鲜教化之功，而以后朝鲜半岛的历代王朝对此也是津津乐道的。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        箕子朝鲜的历史，在朝鲜半岛上出现的早期史书中，都有或多或少的记载。金富轼的「三国史记」提及“箕子受封于周室”，④
+        僧一然的「三国遗事」也提及“周虎王即位己卯，封箕子于朝鲜”。⑤
+        可见，从现存最早的史书看，朝鲜是普遍认同箕子封朝鲜的历史。而对箕子之崇拜，朝鲜王朝（1392—1910）时期，发展至最高峰，箕子朝鲜成为李氏朝鲜政权的一面重要旗帜，箕子崇拜也是朝鲜政事与礼仪中一项重要内容，因为他们把箕子朝鲜看成是朝鲜王朝维系与明朝关系的一种重要媒介，是他们在中华世界体系中争取到“小中华”地位的重要保证。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        洪武二十五年（1392），李成桂废除高丽幼主，自立为王，建立李氏朝鲜政权。李成桂开国之初，就显示其对明朝亲附的态度，不久即以“权知国事”的名义，派使臣韩尚质以“和宁”（李成桂出生地）、“朝鲜”请国号于明朝。朱元璋以为“东夷之号，惟朝鲜之称美，且其来远，可以本其名而祖之”，⑥
+        乃赐其国号为朝鲜，是为朝鲜王朝。请求中国皇帝赐予国号，在朝鲜半岛历史上也仅此一次。李成桂当即派遣使臣前往明朝谢恩，因为赐号朝鲜，有谏官上疏国王：既然“朝鲜”乃箕子之所封，「洪范」箕子之所陈、帝王之所范，故请求于经筵首讲「洪范」，以明其教。⑦
+        而当时多次出使明廷的朝鲜开国功臣权近说：“今天子赐号之恩，殿下复旧之德，实与武王之封箕子，箕子之治朝鲜同一揆也。又使民知秉彝之性，初无华夷古今之异，苟能勉力以遵皇极之训，则神人协从，子孙逢吉，可以称夫大同之旨矣。”⑧
+        把箕子作为朝鲜太祖李成桂比附的对象，赋予其极高地位。又作诗颂道：“东国方多难，吾王功乃成；抚民修惠政，事大尽忠诚。赐号承天宠，迁居作邑城；愿言修职贡，万世奉皇明。”</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朱元璋赐李成桂国号为朝鲜，所谓“其来远矣”，即与箕子有关，朝鲜诸臣亦马上与箕子联系起来。郑道传是李成桂的开国功臣，朝鲜王朝的一切政制皆其亲手制订，对于朱元璋赐号朝鲜，他立即将李氏朝鲜与箕子朝鲜相提并论，并以箕子朝鲜作为李氏朝鲜效仿的目标，深以为荣。“天子之德，无愧于周武；殿下之德，亦岂有愧于箕子哉！”⑩
+        把明太祖朱元璋比作周武王，将朝鲜太祖李成桂比作箕子，以为「洪范」之学、八条之教，皆将行于今日。可见，明朝赐国号“朝鲜”，朝鲜君臣都有着深刻的感恩情怀。当时朝鲜君臣，皆以赐号“朝鲜”为莫大之荣耀，想方设法从各方面与箕子联系起来，成为他们塑造认同的一种重要手段。以“朝鲜”作国号，显示李成桂对王朝正统性的考虑，既从本国历史上寻找新兴王朝的合法性，又通过箕子朝鲜接受周武王册封的传统，来争取明朝天子的册封，从而为其王朝获取宗主国的认同，以确立其正统性。(11)
+        也由此开启了朝鲜箕子崇拜的先声。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜王朝作为明朝的藩国，赐号“朝鲜”，政治上，固然强化了李氏朝鲜的正统地位，而从文化心态上，对于朝鲜久已存在的箕子信仰给予了很强的动力。用“朝鲜”一名，无论是朱元璋，还是朝鲜君臣都不约而同地联想到了箕子朝鲜。尽管韩国学者韩永愚认为“朝鲜”一名，并非仅仅是与箕子有关，因为还有檀君朝鲜与卫满朝鲜，(12)
+        但这并不能否认朝鲜君臣加强与箕子朝鲜的联系，并无充足的史料说明他们还联想到了檀君或者卫满。箕子朝鲜，作为一种根基历史的作用，给予朝鲜无限的暗示。在传统的中华世界体系之中，中华是中心，而朝鲜半岛是中华世界的边缘，“在族群边缘，人们强烈地坚持一种认同，强烈地遗忘一种认同。”(13)
+        朝鲜王朝立国之初，奠定了他们强烈的箕子信仰的基调。从最开始朝鲜君臣就以箕子朝鲜作为比附的对象，随后为历代国王所遵循。世宗国王即言：“吾东方文物礼乐侔拟中国，迨今二千余祀，惟箕子之教是赖。”(14)
+        并推崇武王封箕子于朝鲜，乃“天厚东方，畀之仁贤以惠斯民”。英祖亦以为“东方能免左衽之俗者，赖箕子之教”。(15)
+        箕子在朝鲜王朝受到了空前的重视。他们从各个层面上强化与箕子的关系，首先是凸显箕子在朝鲜历史上的地位以及现实中的尊崇，这种崇拜，是朝鲜王朝对于以明朝为中心的中华世界认同的一种表现，也是认同以明朝为中心文化秩序的一种体现。(16)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <b><font size="3">二、箕子朝鲜历史之建构与箕子崇拜</font></b>
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜半岛历史上有三个朝鲜：檀君朝鲜、箕子朝鲜与卫满朝鲜。对于这三个朝鲜王朝，尤其是前两者，何者是历史，何者是神话，不同的时代有不同的认识。决定这种认识的关键并非是追求历史的真相，而是为现实的需要与当下的认同所决定的。尽管当今在强调民族国家独立自主的原则支配下，檀君朝鲜被无限的放大，箕子朝鲜被贬斥乃至抛弃，但是在以明朝为中心的中华世界体系之下，作为明朝藩国的朝鲜王朝，箕子朝鲜的地位是最引人注目，也最为朝鲜君臣所津津乐道的。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        作为中原王朝的藩国，朝鲜半岛上的王朝，政治上对中原王朝固然是采取臣服的姿态，而在文化上也是以比附与仰慕的心态。从统一新罗以来，逐步将箕子朝鲜吸收并融入朝鲜的历史建构中去。三国时期就已开始箕子崇拜，高句丽时期把箕子当神崇拜。高丽时期，箕子被看成是历史人物，而且箕子崇拜在政治上亦有相当重要的象征意义。高丽肃宗壬午（1102）有感于“我国教化礼义，自箕子始而不载祀典，乞求其坟茔，立祠以祭”。(17)
+        “令平壤府求封箕子坟茔，立祠以祭（此祠即丁字阁），又建箕子祠于平壤（此祠即箕子殿）。忠肃王七年戊寅（1338），以箕子礼乐教化自平壤而行，令平壤府修祠致祭。”(18)
+        可见，箕子墓是高丽年间发现的，而箕子祠是高丽年间修建的，从此箕子就逐渐被确立为韩国文化的象征、文明的始祖。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜王朝的箕子崇拜，首先体现在对箕子朝鲜历史的解读上。朝鲜太祖元年（1392），礼曹判书赵璞上书称：“朝鲜檀君，东方始受命之主；箕子，始兴教化之君。”(19)
+        要求朝鲜王室令平壤府依时致祭。当时看起来，似乎檀君与箕子是平等的，但朝鲜更加注重的是“教化之君”箕子。从朝鲜太祖一直到世宗年间，是朝鲜制度建设创始乃至逐步完善的时期。在「朝鲜世宗实录·地理志」中，这样陈述三个古朝鲜：“唐尧戊辰岁，神人降于檀木之下，国人立为君，都平壤，号檀君，是为前朝鲜。周武王克商，封箕子于此地，是为后朝鲜。逮四十一代孙准，时有燕人卫满亡命，聚党千人，来夺准地，都于王险城（即平壤府），是为卫满朝鲜。”(20)
+        「东国舆地胜览」也沿袭这样的叙述。檀君朝鲜为前朝鲜，前朝鲜的历史一直处于模糊状态，箕子朝鲜被称为“后朝鲜”，而对后朝鲜的历史则有相当详细的记载。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        隆庆元年（1567）成川府使郑礥上疏曰：“使九种之夷，洪荒未久，旋化为礼义，免为禽兽，皆箕子之功德也。今乃与檀君、赫居世、东明、温祚混同于历代始祖之列，岂不为东土千古之大羞乎？”(21)
+        极其强调箕子的开化之功，对于只是将箕子看成是始祖之一，表示批评，认为他们是应该感到羞愧的。将箕子教化之功置于至高无上的地位。万历庚戌（1610）韩乔上疏，表达了几乎相同的意思，他说：“箕子之于我东，功德巍巍，与天同大，岂可与檀君及高句丽、新罗、百济建庙故都而止乎？！”(22)
+        要求“都城及各道界首官，皆建箕子庙，春秋享祀，一入释奠，又于庙旁必立书院，讲明九畴之学。士习日新，则其于政教，岂曰小补哉！”(23)
+        因为箕子教化之功，所以箕子的地位应该比其他始祖要更为尊崇。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜王朝出现过多种关于箕子朝鲜历史的著作，有尹斗寿编「箕子志」、李珥撰「箕子实纪」、韩百谦撰「箕田考」，英祖命徐命膺整理了「箕子外记」，分别对箕子立国始末、世系、年表、政制、田制详加考订。尹斗寿「箕子志」，全书九卷，卷首包括箕子真像、箕子手笔、事迹图、祠墓图、谱系图、世系、序。卷一「洪范」、卷二传、录，卷三祀典、致祭文、御制文，卷四赋、诗，卷五辞、操、歌、赞；卷六论；卷七说、语、辨，卷八序、记、跋，卷九碑文。将中朝有关箕子的材料全都汇编成册，并有箕子朝鲜十分详尽的世系表。在「箕子朝鲜王位讳号世系」中，称箕子为“太祖文圣大王”，对于箕子的事迹如斯叙述：</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        箕子姓子氏，讳须臾，又讳胥臾。……丙戌五十四祀，周武王己卯，痛深革殷志坚罔仆，遂东出朝鲜，都平壤，国号后朝鲜。教民八条，变夷为夏。周成王戊午薨，在位四十祀，寿九十三。墓平壤城北王荇山负子原俗称兔山。三十六世嘉德王追尊为王。(24)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        箕子在位四十年，最终卒年九十三。而他传位四十一世，末代为哀王，“讳准。「舆地胜览」云：武康王始皇二十七年辛巳立，汉惠帝元年丁未燕人卫满来侵，率左右宫人浮海南出，立国金马郡今谷山，改国号马韩。在平壤为王二十七年。自箕圣东渡，己卯后凡四十一世，历年为九百二十九年。”(25)
+        而马韩又九世，“自康王戊申，为一百七十七年。”(26)
+        新莽元年（公元9年）为百济所并。这样箕子朝鲜的世系清晰地陈述出来，这是朝鲜王朝构建出来的。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜王朝对古史三朝鲜中的檀君朝鲜与卫满朝鲜，多有微词，甚至有怀疑的说法。檀君朝鲜，最早的记载始于高丽时期僧一然的「三国遗事」。其「纪异」篇依据朝鲜「古记」载：天帝桓因有庶子桓雄，贪求人世，父知子意，乃授天符印三个，雄率徒三千，降于太白山顶檀树下，谓之神市，为桓雄天王，主人世间三百六十余事。当时有一熊一虎，同穴而居，常祈于桓雄，愿化为人。时神遗灵艾一柱，蒜二十枚曰：尔辈食之，不见光于百日，便得人形，熊、虎食之，忌三七日，熊得女身，虎不能忌，而不得人身。熊女者，无与为婚，故每于檀树下，咒愿有孕，雄乃假化而婚之，孕生子，号曰檀君王俭，以唐高即位五十年，都平壤，始称朝鲜。御国一千五百年，后入阿斯达为山神，享寿一千九百零八岁。(27)
+        以后檀君被称为朝鲜始祖，但是对于这种说法，朝鲜儒林多有怀疑者，不是认为其无从查考，就是觉得其“荒诞不经”。徐居正（1420—1488）在「三国史节要序」中称：“吾东方檀君立国，鸿荒莫追；箕子受周封，八条之教，有存神之妙。当时必有掌故之官，记动记言矣，而今无所存，良可叹已。”(28)
+        在他看来，檀君之事已是“鸿荒莫追”，无从查考了，而箕子既有八条之教，则得“存神之妙”。他在「东国通鉴」中将“檀君朝鲜”列入「外纪」，并对「三国遗事」的说法提出质疑，其曰：</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        古纪云：檀君与尧并立于戊辰，历虞夏，至商武丁八年乙未，入阿斯达为神，享寿千四十八年。此说可疑。今按：尧之立，在上元甲子甲辰之岁，而檀君之立在后二十五年戊辰，则曰与尧并立者非也。自唐虞至于夏商，世渐浇漓，人君享国久长者，不过五六十年，安有檀君独寿千四十八年，以享一国乎？知其说之诬也。(29)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        在「笔苑杂记」中，徐居正继续坚持这种怀疑，以为：“当时文籍不传，其真伪不得而考。至今传袭，以古记为纪。居正以为当尧之时，人文昭宣，至于夏商，世渐浇漓，人君享国久长者不过四五十年，人寿上寿百年，中寿六七十年，下寿四五十年，安有檀君独寿千百年以享一国乎？知其说之诬。”(30)
+        徐居正多次怀疑檀君朝鲜的传说，以为其说有悖常识，不可信。朝鲜后期实学派大师柳馨远（1622—1673）也认同这种批评，道：“夫檀君东国首出之君，必其人有神圣之德，故人皆就以为君。古之神圣之出，固异于众人者。亦安有若此无理之甚乎？……其造诡之术，亦狭而不博矣。”(31)
+        南九万（1629—1711）更直言此说“妖诬鄙滥，初不足以诳闾巷之儿童，作史者其可全信此言，乃以檀君为神人之降，而复入山为神乎？”又认为“檀君立国千余年之间，无一事可纪者，而独于涂山玉帛之会，称以遣子入朝。其假托附会，诚亦无足言者矣。”(32)
+        可见，尽管有檀君朝鲜的传说，但是多斥其诬妄，当时朝鲜儒林仅仅认同有檀君这么一个始祖，但是对其如何产生、对朝鲜的历史上到底有何功绩，则模糊不清。正如实学派大师李瀷（1681—1764）所言：“檀君之世，鸿蒙未判，历千有余年，至箕子东封，天荒始破。”(33)太宗年间，礼曹右参议许稠更说“本国之有箕子，犹中国之有帝尧”，(34)
+        因而在判定朝鲜的根基历史时，朝鲜王朝君臣信奉的是箕子朝鲜，而对于檀君传说则心存怀疑。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜人的这种心态在现实中也有不同程度的体现，首先表现在祭祀上。正如前面提到，高丽时期已有了箕子墓、箕子祠，已经开始进行箕子祭祀。而当时檀君还只是存在于口耳相传的神话中，并不为大多数人所认同。进入朝鲜王朝，太祖年间，令平壤府春秋祭祀箕子。太宗十三年（1413），礼曹讨论祭祀的规格和仪礼，将檀君、箕子与高丽太祖都定为中祀。而且称谓上也有所改变，“谨按校书馆祝板式，于檀君、箕子称国王，前朝太祖称朝鲜国王，似不合理。许于檀君、箕子称朝鲜国王。”(35)檀君与箕子同被视为朝鲜国王。对于檀君与箕子，祭祀位板上书何号，世宗年间进行过仔细讨论。先是，世宗十年（1428）八月，平安道监司对箕子祠中书“朝鲜侯箕子”表示异议，他在疏中称：</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        臣窃见位目书曰“朝鲜侯箕子”。夫箕，国名；子，爵也。既曰朝鲜侯，又曰箕子，臣恐取笑于人也。且史称武王封于朝鲜，而不臣也，今以朝鲜侯之称，冠于箕子之上，臣以为未安也。臣又窃念箕子之德东人，与天地而无穷期矣，其功德之懿、风化之远，诚不可以不表也。是宜追上尊号，仍加封爵，而于其位目上书“殷太师”，下书东国尊号封爵，则上可以昭箕子不臣之心，下可以著东人不忘之意，而可知其为箕子也。(36)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        礼曹对此很重视，当即讨论此问题，经过多次商讨，最后定为“后朝鲜始祖箕子”，与此同时，檀君则被定位为“朝鲜檀君”。(37)
+        以后基本采用这种称谓。世宗十九年（1437），定祭祀规格称：“箕子，中祀，殿位版书‘朝鲜始祖箕子’。檀君，中祀，高句丽始祖，中祀。殿檀君位版书‘朝鲜檀君’，高句丽位版书‘高句丽始祖’。”(38)
+        箕子冠以“朝鲜始祖”之名，而檀君只是“朝鲜檀君”之名，并无“始祖”二字。在「朝鲜世宗实录·五礼」中，也是称“朝鲜檀君”，箕子为“后朝鲜始祖箕子”。(39)
+        反映出当时朝鲜君臣的一种普遍心态，当时他们虽然承认檀君的存在，但是如何定位，还是处于一种模糊的状态，所以只能给这样模糊的称号，而箕子则十分明确是其“始祖”。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        称号的差异，反映在祭祀上也有不同。一直到世宗年间檀君的祭祀都是从属和比附箕子的。当时平壤有箕子庙，“在府城北兔子山上亭子阁，石人石羊皆南向，祠堂在城内义理坊。”(40)
+        但是檀君尚无庙，檀君的神位置于箕子庙中。世宗七年（1425）九月，司酝注簿郑陟上书论及箕子祠堂中箕子与檀君的神位，从郑陟的疏文中，可以看出几个问题：第一，朝鲜初年在平壤重建了箕子祠，因为明朝使臣问及过，故而在平壤文庙东边重建了箕子祠，而檀君并没有专门的祠庙。第二，在箕子祠中，“箕子之位在北向南，檀君之位在东向西。”箕子之位乃是坐北朝南，居于主位，檀君则是坐东朝西，居于次席，主次分明。第三，尽管同处一堂，但是箕子祭祀是每月朔望举行，而檀君则只是春秋两祭，繁简有异。第四，箕子有祭田，而檀君没有。第五，既然檀君是作为朝鲜的始祖，而且较之箕子早一千余年，地位上理应比箕子重要，现实中却不如箕子受到重视。因为箕子教化之功，又无法在箕子祠中将檀君与箕子同为坐北朝南，并居上位，所以最终建议另建檀君祠。(41)
+        礼曹采纳了郑陟的建议，于是在平壤另建檀君庙，一直到世宗十一年（1430），才最后建成，但檀君庙除了崇祀檀君外，还有高句丽始祖东明王的神位。“檀君在西，东明在东，皆南向。每春秋降香祝致祭。”(42)
+        可见，尽管建成了檀君庙，还是与东明王共享，比照箕子祭祀情形开展对檀君的祭祀。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        英祖三十二年（1757）三月，京畿、忠清、全罗、咸镜、平安、黄海六道儒生等上书，请于汉城立箕子庙，诸道各建一庙，以为永世崇奉之地。王世子以不可遽然轻议为答。(43)
+        尽管当时并未采纳这个建议，但是六道儒生合疏请于各道建箕子庙，反映出他们极度尊崇的心态。这样的疏词只能针对箕子，而没有提及过檀君或者其他始祖。万历四十年（1612），箕子庙改称崇仁殿，檀君与东明王庙改称崇灵殿。「箕子志」载箕子庙规制曰：“崇仁殿制度：正殿三架三间，东西行廊各三间，神门三间，东西挟门各一间。参奉处所三间，大门三间，碑阁三间，斋戒厅七间，小门二间。”(44)
+        是有相当规模的，祭器亦存于殿中。“祀之以君道。”(45)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        除箕子庙外，另有箕子墓、箕子碑（朝鲜王朝在箕子墓前所立的）、箕子井、井田等等跟箕子有关的遗迹。尹斗寿「箕子志」说：“平壤，箕子之旧都。城之南有井地，区划分明，沟滕正正。千载以下，犹可见其三代之制焉。城之北有兔山，衣冠所藏，松桧蔽天，邦人敬之，至今为瞻依之地。其余谓箕子宫、箕子井、箕子杖，无非故国旧物之可尚者。不独「易」之「明夷」、「书」之「洪范」行于世也。”(46)
+        可见，除了文献记载外，平壤留存的箕子遗迹相当多。这些遗迹并非朝鲜王朝时期才被“发现”，高丽王朝就已经修建了箕子墓，朝鲜初年开始派专人守护。世宗元年（1419），有大臣上疏建议当立箕子碑，“以显扬功德”，(47)
+        十年（1429），又有大臣论道：“墓之有碑，以记行迹，非古也，况箕子墓，土人相传耳，更无文籍可考，生于数千载之下，而据土人之传，以为的说，恐非敬谨之道。”(48)
+        朝鲜对于箕子墓因为是据当地土人传说而定的，并无十足的把握，于是命判右军府事卞季良制箕子庙碑文，盛称箕子之功，以官方的名义正式确认箕子墓。在世祖、成宗年间，都曾对箕子墓大修过。成宗年间，还令平安道观察使李则将箕子墓茔内物像、祠宇、制度上报王室，“箕子墓垣墙、丁字阁等，高低长广，备细尺量，图画上送，垣墙则燔砖改筑，又墙内布砖，丁字阁则整齐改构，以人口几名几日毕役，所入物件，详悉录启。”(49)
+        从而决定修墓的工役大小。以后英祖年间，又多次修缮过箕子墓。另外，还在全国建了三处箕子影殿，供奉箕子画像。(50)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        可见，朝鲜王朝凸显箕子朝鲜在朝鲜根基历史上的地位，重视对箕子的祭祀，重视半岛上箕子的遗迹，史书给予箕子相当重要的地位，都显示着他们强烈的箕子崇拜，这种崇拜是他们对中华文化认同的一种表现。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <b><font size="3">三、教化之君：箕子对朝鲜半岛教化之功</font></b>
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜对箕子的崇拜，无论是强调箕子朝鲜的重要历史地位，还是重视对箕子墓的保护、修缮，对箕子的祭祀、箕田的重视，都是因为朝鲜王朝普遍认同箕子的教化之功，把箕子视作朝鲜实现“由夷变华”的关键人物。朝鲜王朝是明朝的藩国，政治上、经济上对明朝俯首称臣，每年定期派遣使臣前往明朝朝贡，开展朝贡贸易。思想上，皈依儒教文明，信奉程朱理学，在以明朝为中心的东亚中华世界体系之中，箕子朝鲜与箕子崇拜，把朝鲜王朝提高到一个相当高的地位。而当清朝入主中原，成为东亚中华世界体系中新的主宰时，朝鲜在政治与经济上臣服，文化思想上虽不予认同，但箕子朝鲜又成为他们新的旗号，是他们宣称“小中华”的重要依据。朝鲜把箕子作为“教化之君”，表现在几个方面。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        首先，在朝鲜几位始祖中，箕子是唯一来自中国的，而且在中国的文化史与思想史上，具有重要地位，是儒家极为尊崇的“圣人”，因而使得朝鲜王朝有一个可以与中国远古圣人相提并论的开国之君。在中国方面，唐德宗时立箕子庙于汲郡，岁时奉祀，命柳宗元撰文立碑。元顺帝至正六年（1346），封箕子为仁献公。明洪武年间，国子司业宋濂上太学释奠，以伏羲、神农、黄帝、尧、舜、禹、汤、文王、箕子、武王、周公、孔子并祀于太学。因而越到后来，箕子的地位越高，越受到尊崇。但中华世界体系历来是以中国为中心，朝鲜半岛长期以来处于从属和边缘的境地，中国成为朝鲜半岛学习外来文明最为主要的来源，甚至是唯一的来源，这样一位来自中国的圣人，自然而然成为朝鲜提高自身文化地位的一条捷径。王明珂在「英雄祖先与弟兄民族」一书中，将箕子朝鲜看成是以华夏为中心的“英雄徙边记”故事的一个事例。(51)
+        他着重分析了来自中原的影响，在某种层面上有着深刻的意义。但是他忽视了周边各地自身的建构，正是因为周边自身的依附与建构，这种所谓的“英雄徙边”的故事才会广为周边各族接受，因为这种故事提高了周边地区在中华世界中的地位，周边地区自身的建构比中原王朝的影响更为重要。朝鲜王朝的箕子崇拜正是这种建构的延续与进一步加深和强化。宋时烈说：“我东本箕子之国，箕子所行八条，皆本于「洪范」，则大法之行实与周家同时矣。孔子之欲居，亦岂以是耶？”(52)
+        所谓“大法与周同时”，乃是与中原文明同时而兴也，也就是与中原文明平起平坐了。英祖国王祭祀箕子，文曰：“噫！箕圣非徒孔圣称仁，我东礼乐文物，侔拟中华者，寔箕圣之遗泽也。”(53)
+        正因为有箕子，朝鲜才可以“侔拟中华”，由此道出了他们崇拜箕子的一个重要目的，可以提高朝鲜在中华世界中的地位。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        其次，“托身自幸居何陋，箕子当年化九韩。”(54)
+        箕子作为教化之君，将朝鲜由“夷”带入“华”的文明圈，这是朝鲜崇拜箕子的真正原因。春秋时代，当时所认识的社会基本上分作华夏与夷狄两大类。居于中原王朝中心地带为“华”，乃是中华，是文明程度最高的地区，而四周有东夷、西戎、南蛮、北狄。尊王攘夷的华夷观为儒家重要的观念，华夷观念也成为中华世界评判文明程度高低的标准。朝鲜原本处于“华夏”边缘，是属于东夷的一支。但朝鲜是一个积极向“华”学习的“夷”。韩元震（1682－1751）论曰：“虽以夷狄之人，而能弃夷狄之行，慕中国之道，服中国之服，言中国之言，行中国之行，则是亦中国而已。人亦将以中国待之，岂可复问初之为夷狄也。”(55)
+        朝鲜自认为出身于“夷”，属于东夷的一支，朝鲜王朝君臣普遍认为箕子是朝鲜由“夷”入“华”的关键人物。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜儒林纷纷称颂箕子教化之功。权近说：“「九畴」，天人之学；「八条」，风俗之美；基我东方数千载礼义之化。”(56)
+        在权近看来，「洪范九畴」与“八条之教”，是朝鲜礼义之基石。“动人至今囿于礼义之场者，全是太师之教。”崔岦说：“朝鲜之有箕子，犹周之有文武也。”(57)
+        箕子在朝鲜的地位，就如同中国的周文王、周武王。李珥说：“檀君首出，文献罔稽，恭惟箕子诞莅朝鲜，不鄙夷其民，养之厚而教之勤，变魋结之俗，成齐鲁之邦，民到于今受其赐，礼乐之习，济济不替。”(58)
+        朝鲜之所以被称为礼义之国，乃是因为有箕子的教化。宋时烈说：“天眷海隅，箕子东来，以「洪范」之道，陈八条之教，则夷变为夏，吾为东周。”“陈「洪范」，叙九畴，以启万世道统之源。”(59)
+        因为箕子的东来，不仅朝鲜由“夷”变“华”，在清朝入主中原，取代明朝以后，朝鲜更成为“东周”了。许穆说：“箕子至朝鲜，殷民从者五千余人，诗、书、礼、乐、巫、医、卜、筮、百家技艺皆从之。”(60)
+        百家技艺皆从其入朝，因而将朝鲜的文明推进一大步。李珥说：“朝鲜被仁贤之化，为诗书礼乐之邦，朝野无事，人民欢悦，以大同江比黄河，作歌以颂其德。”(61)
+        因为箕子的东来，大同江竟可视作黄河。“吾东方在虞夏时，史不传，不可考，周封殷大师箕子，则其通中国也，盖可知已，虽其封之，又不臣之，重其受禹范，为道之所在也。大师之祠，在平壤府，国家祀之弥谨，则大师之化我东人也深矣。”(62)
+        箕子是其“小中华”的开始，正是箕子的东来，把中华文明带给了朝鲜半岛，从而奠定其以后文化发展的基础。而箕子“八条之教”则是朝鲜教化之本，使得朝鲜最终成为“小中华”。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        其三，箕子被视同朝鲜之孔子。因为箕子“八条之教”，使得朝鲜“其化门不夜扃，行旅野宿，妇人贞信不淫，礼义之隆，未有盛于此时者也。”(63)
+        风俗极佳。因而李廷龟将箕子视同中国之孔子，他说：</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        箕子之教东方，是犹羲轩尧舜之教中土，盖有不可得而已者，此又非天意而谁欤？天之不死箕子，为传道也，为化民也。箕子虽欲死，得乎？武王虽欲不封于朝鲜，得乎？然则箕子之有功于斯道，实天下万国之所共赖，而其亲炙之恩，则吾东国最偏受。三韩万世人得以为人之功之德，为如何哉！孔子之道虽大，而无外蛮貊之邦，犹有所不化。箕子之教东方，在孔子未生之前，故孔子至有乘桴欲居之志。礼义文明之化，其所从来久矣。倘使箕子之教，不有以先之，则后虽有孔子之道，其化岂易以入哉！然则我国崇报之礼，当与孔子并隆。(64)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        这里对箕子教化之功作了详尽的解释，有几点值得注意：1.箕子对朝鲜之教化，就如同“羲轩尧舜之教中土”。2.箕子教化之功，万国“共赖”，但朝鲜得“亲炙之恩”。3.箕子教化在孔子之前，以致孔子都想居于东方。4.孔子之道虽大，但也有不及箕子之教的，因为他未有外化“蛮貊之邦”。5.箕子之教有助于孔子。6.崇报箕子应该与孔子相同。可见，朝鲜对箕子教化之功的极度尊崇。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        其四，建仁贤书院以崇祀，立箕子后代以主香火。李珥说：“箕子罔极之恩，其于实迹宜家颂而人熟也。”(65)
+        故而他自撰「箕子实记」，以志其事。因为箕子对于朝鲜“教化”之功最大，是无人可比的，于是在平壤建箕子庙和其他地区建了箕子影殿之基础上，有儒生要求建崇祀箕子的书院。朝鲜的书院非常多，中晚期以后，书院遍布全国，成为儒学士子们读书的场所。既有奉祀先贤先师之祠庙，同时又为讲学教育之场所。李退溪云：“大抵学校之设，谁非为道学耶，而在书院，则为道学之意尤专，其祀贤也，以道学为主可也。”(66)
+        书院乃朝鲜宣讲道学的场所。到了孝宗、肃宗时代，书院广布全国，以至于一道至有八、九十所之多。且“宫室之美，守护之盛，往往逾越圣庙”，(67)
+        成为地方上的一大势力。在这样的情形之下，作为朝鲜教化之君的箕子，朝鲜儒生主动给他建书院。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        嘉靖甲子（1564），郑宗荣创立精舍，曰学古堂。万历丙子（1576），金继辉广其制曰洪范书院。壬辰（1592）兵燹后，李元翼重建，号曰书剑斋。庚子（1600），徐省得赵孟芾所画箕子太师像，藏之院中。甲辰（1604），金信元建叙伦堂东西斋，以为多士钦崇讲明之所。光海戊申（1608），赐匾额曰仁贤。癸丑（1613），郑赐湖重建仁贤殿，己卯（1639），沈像奎重修洛书楼。(68)
+        是为仁贤书院建制沿革。仁贤书院房屋有数十间，田地有数十结。(69)
+        郑元容「仁贤书院藏修记」：“平壤外城，去府治之十里，有院宇以奉箕子像。院之名曰仁贤。坛台宫室井田之基，尚宛然。先儒云东国之人奉箕子，当如孔子。外城即东鲁之阙里也。……用钱四万，易院门外田二区，敬资院宇修葺之费，又藏经书、通史、仪礼、小学、八家文，凡人生日用礼为，大而修身之道，自小学始，经纬经史，而发挥文章，则学者之事备矣。诸生游焉，而求之不其有余师乎？余将见诸生无穷之用矣。”(70)
+        成为讲授「洪范」之道，又崇祀箕子的场所。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        对于箕子后裔，在朝鲜初年并没有确定。但是中期以后，却成为朝鲜君臣十分关心的问题，并且最终定下了鲜于氏为箕子后人。先是，太宗十二年（1412），礼曹右参议许稠上书谈及他出使明朝时，吏部尚书蹇义问他朝鲜是否还有箕子的后代，许稠告知其箕子“无后嗣矣”。(71)
+        弘治年间，崔溥因风漂流到中国，从浙江上岸，由明朝官员陪同前往北京，到苏州的时候，有人问及箕子后人之事，崔溥说：“箕子之后，箕准为卫满所逐，奔马韩以立都，后为百济所灭。今无嗣。”(72)
+        依然还没有发现箕子后人。不过，隆庆元年（1567），成川府使郑贤上疏极论尊崇箕子之事，其中有一条说：“箕子后孙鲜于氏中择其稍优者，袭爵奉祀，如中国衍圣公例，俾居平壤，世食傍近一邑之税。”(73)
+        可见，当时已有鲜于氏是箕子后裔的说法。为何将鲜于氏定为箕子后人呢？因为「世本」有曰：“鲜于氏，武王封箕子于朝鲜，其子食采於于，因合鲜为氏焉。”(74)
+        宣祖年间，朝鲜君臣又讨论过箕子后人，有大臣说：“世传清州韩氏，乃箕子之后也。”国王问其故，答曰：“有马韩、辰韩、弁韩为三韩国号，故指韩为箕子之后。”所以，“孔哥、印哥、鲜于哥皆是箕子之后。盖箕子之少子，封于于，故谓之鲜于。古诗有云‘箕子枝裔多髯翁’，盖指单于枢也。”(75)
+        原来说没有后代，宣祖年间有几种传说出现，清州韩氏、鲜于氏都说是箕子之后。这实际上反映出当时朝鲜对箕子的崇拜进一步强化，祭祀必须寻找其后人。到了光海君时期，先后有儒生多次上疏请求立箕子后人鲜于氏主祀。光海君三年（1611），平安监司崔瓘启曰：“箕子之后鲜于寔，特令该曹，援据古经，继绝于千百载之后，启箕壤士民之心，实合朝家崇报之典。”(76)
+        次年（1612），平壤箕子祠改成崇仁殿，礼曹判书李廷龟上疏，力主将鲜于氏定为箕子后裔，并由他们主祀箕子。(77)
+        在浓厚的崇拜箕子的氛围之下，箕子的后代也就找到了，不仅免除他们的赋役，而且尽可能地给予官职。仁祖年间，授鲜于浃为成均馆司业。“浃，平壤人，箕子之后，以学行闻。”(78)
+        肃宗年间，吏曹收用箕子后裔鲜于翎。朝鲜后期名臣金尚宪写出了“太师遗风千古传，太师子孙多才贤”(79)
+        的诗句。他们将鲜于氏立为箕子的后代，其现实意义上是确立箕子后继有人，祭祀由箕子后裔主持，而其象征意义就更大了。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        综上所述，作为教化之君的箕子，既是朝鲜可以与中国相提并论的开国始祖，自然就提升了朝鲜的地位。而其“八条之教”，将出身东夷的朝鲜变成“小中华”，成为礼义之邦，受到朝鲜儒林的一致称颂，甚至被视为朝鲜之孔子，建书院以传其道，立后裔以奉其祀。这是其箕子崇拜的又一重要表现。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <b><font size="3">四、箕子认同之消亡与檀君信仰之勃兴</font></b>
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜的古史认识，并不像中国的历史认识一样。司马迁「史记」的出现，反映出汉代以后中国历史的认识从炎黄时代开始，从此奠定了一个基本的认同。而朝鲜长期以来对古史的认识并没有形成一定的格局。朝鲜半岛上各个王朝的正统认识并非关注朝鲜历史上王朝的正统地位，相反，他们是关注中原王朝的正统地位，由此决定他们自身的正统性。因为作为中原王朝的藩国，他们的正统性来自于中原的册封，其正统地位是来自于宗主国中国王朝的确认。(80)
+        进入高丽王朝时期，才开始追溯其历史到三国时代，所以有「三国史记」的著述。而高丽王朝时檀君传说出现，但长期受到讥讽。世宗九年（1427），讨论檀君与三国始祖是否合祭于一坛，世宗说：“檀君统有三国，予所未闻。”(81)可见，当时还未将檀君与三国始祖视作白上而下的正统君主。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        对檀君传说现存最早的文献记载是僧一然（1206—1289）的「三国遗事」，但是正如前面提到的，朝鲜儒林对于「三国遗事」中檀君的记载多有批评，以为荒诞不经，不足为信。尽管朝鲜王朝君臣普遍认同檀君是开天始祖，但却不认同成书于高丽王朝时期的「三国遗事」的传说故事。这样就有一个悖论，因为以后关于檀君的记载都是源于「三国遗事」，既然「三国遗事」的记载不可信，又没有其他的文字史料为据，那又为何相信檀君传说呢？韩国现存的最早的官修史书是高丽王朝金富轼（1145）的「三国史记」，书中并没有檀君的名字，「三国史记」中只有这样的记载：“平壤者，本仙人王俭之宅也。或云，王之都王俭。”(82)
+        只称“王俭”，或许与檀君能够挂上钩，对于其出生的神话传说，只字未提。正如前面提到过，朝鲜儒林批评「三国遗事」的说法，上文已经举过几例，而李瀷（1681—1764）的批评也很有代表性，他对「三国遗事」所构建的檀君神话故事进行了全面的否定：第一，认为檀君生于檀树下，其说不可信，甚至桓雄、桓因都是“荒诞可弃”的。第二，说檀君之国为箕子所占，也不合常理，身为“仁圣”的箕子，不可能占他人之国。应当是檀君之国衰败以后，箕子再“披草莱开创”的。可见，不能容忍对箕子不好的说法，即便是与始祖檀君传说有关，也予以反驳。第三，如果按照权近的解释，将檀君千岁解释为传位历千年，那么说他的后孙人山为神也是“无理”的。第四，既然檀君之国以檀为号，其君称檀君，则也只是臆说而已。李瀷认为这种错误归结为这些故事是发生在辽地，但朝鲜人将其附会到朝鲜半岛，“故妄疑亦涉矫枉过直焉”。(83)
+        瀷是朝鲜后期的实学派大师，他的批评很具有典型性，反映了当时儒林一种普遍心态。也就是说，他们虽然相信檀君为始祖，但对相关的传说则普遍怀疑。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        安鼎福（1778—1791）的「东史纲目」中，全部采纳李瀷的说法。而他撰史是从箕子开始的。在「凡例」中称：“凡统系为史家开卷第一义，而「（东国）通鉴」以檀箕事迹别为外记，其义不是。今正统始于箕子，而檀君附见于东来之下，仿「通鉴纲目」篇首三晋之例。”(84)
+        将檀君附在箕子之下，箕子朝鲜被视为朝鲜历史的第一正统王朝，此书正是从周武王十三年，箕子东来朝鲜而开始叙述朝鲜历史的。在李瀷的基础上，书中对于檀君神话传说，又作了进一步的分析考订。其曰：</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        按东方「古记」等书，所言檀君事，皆荒诞不经。檀君首出，必其人有神圣之德，故人就以为君耳。古者神圣之生，固用异于众人者，岂有若是无理之甚乎！其所称桓因帝释，出于「法华经」。其它所称，皆是僧谈。罗、丽之代，尊崇异教，故其弊至此矣。东方累经兵火，国史秘藏，荡然无存，而僧释所记，得保于岩穴之中，以传后世。作史者闷其无事可记，至或编入正史，世愈久而言愈实，使一区仁贤之方，归于语怪之科，可胜叹哉！若是不经之说，一切不取，庶欲洗刷袭谬之陋习尔。(85)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        认为以「古记」为根据的「三国遗事」中的檀君神话，因为出自僧人之手，采用了许多佛教中的故事，甚至用佛教中的人物，正史皆因兵火不存，这样的传说因藏于岩穴之中，反而得以流传下来，使得原本神圣的始祖有了许多怪诞的传说，因而他作史时全都摒弃不用。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        19世纪金正浩所作的「大东地志」也依然对于檀君神话表示怀疑，“檀君始末不载于中华，我东正史，则是后人依托神怪而追述之作。东方天皇氏之一万八千岁，恐非实有其事。唐虞典籍所传者，仅一二，而况僻海陋俗，何能记年代国都，于数千载已绝之后耶？”(86)
+        可见，十九世纪朝鲜人仍然坚信檀君神话不可信。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        可见，朝鲜王朝时期，对于檀君的看法，主要有几点：第一，他们认同有檀君这样一个始祖，但是不认同以「古记」为依据的「三国遗事」所构建的檀君神话故事，对于相关的细节都斥之为虚妄或者荒诞不经。第二，檀君仅仅是一个始祖而已，对于檀君朝鲜相关的细节一无所知。第三，檀君朝鲜被称为前朝鲜，箕子朝鲜被称为后朝鲜，檀君朝鲜的历史附于箕子朝鲜之下。第四，对檀君也进行祭祀，祭祀、庙宇都是比照箕子而进行的。在整个朝鲜王朝，从李成桂立国，一直到朝鲜被日本人吞并，在朝鲜人心目中，箕子的地位都高于檀君。1897年大韩帝国建立时，箕子崇拜达至顶峰，箕子被称为“太祖文宣王”，原因乃当时把箕子作为韩国独立的象征，因为他从中国逃出来，建立了一个独立政权。韩国学者韩永愚把朝鲜王朝这种强烈的箕子崇拜，看成是一种民族意识的反映。(87)
+        当时这种民族意识是依从箕子，而并非依从檀君。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        朝鲜半岛对檀君的真正崇拜是在日本殖民时期。1910年，朝鲜王朝被日本人吞并。随后，日本学术界兴起满鲜史的研究。二十世纪初，他们的“满鲜史”研究带有强烈的政治目的，为其吞并韩国服务。不少学者鼓吹“日鲜同祖论”、“日鲜同种论”、“日鲜同域论”、“日鲜一体论”，以殖民史观解读韩国史，为日本殖民统治服务。同时极力抹煞历史上韩半岛与中国的关系，而要做到这一点，首先就是否定箕子朝鲜的存在，将历史上朝鲜王朝奉为绝对认同的箕子朝鲜予以否定。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        否定箕子朝鲜，首先是今西龙的「箕子朝鲜传说考」，1922年6、7月，分两次发表于「支那学」上面。(88)
+        文章先是考察了中国方面史书的相关记载，接着重点论述了朝鲜半岛上对箕子的接受与崇拜，其中心论点是箕子朝鲜是朝鲜王朝政教合一的产物，中国方面的史料并不能充分证明箕子之朝鲜及箕子朝鲜的历史，而朝鲜方面的箕子朝鲜谱系又是伪作。此论一出，即得到包括稻叶君山等人的大力支持，(89)
+        以后遂为日本史学界广为接受。正如梁嘉彬所指出日本否定箕子朝鲜的意图，乃是因为二十世纪初，日本为了其殖民统治，凡一切亲华的势力，对中国依赖的观念都必须铲除，同时美化日鲜关系。(90)
+        日本学术界对箕子的否定，很快就为韩国学术界以致民众所接受。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        韩国学者否定箕子朝鲜，以崔南善为其发端。崔南善生活于日本殖民时期，一反朝鲜王朝崇拜箕子朝鲜之传说，转而加以否认，以强化檀君的地位，确立其自古以来民族独立的形象。金贞培则认为，箕子朝鲜既不能从文献上予以证实，又无法找到确凿的考古资料，因而否认箕子东去说。(91)
+        韩国学者否认箕子朝鲜，一则受日本学说的影响，二则确立其民族的独立发展的形象。在近代民族主义形成和发展过程中，檀君作为大韩民族的始祖和民族象征，得到强化。而与之同时，箕子朝鲜被当成韩国民族主义的障碍而予以否定。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        在否定箕子之同时，是檀君信仰的勃兴。在大韩帝国末年，面临着日本殖民主义者的威胁，韩国民众更多地关注檀君神话与檀君信仰。对于朝鲜王朝时期儒林斥之为荒诞不经的檀君传说故事，朝鲜民众不再怀疑，反而坚信为事实，且更为细致化了。他们推导出檀君诞生的实际年份为公元前2333年11月3日，韩国民众以信奉檀君而创立大侏教，将11月3日最初称为檀君节，后改称御天节，最后定为开天节。1921年11月3日，韩国举行了开天节的庆贺仪式，以后每逢这天，韩国民众都会举行活动，纪念檀君的诞生。但每当这样的时候都受到日本殖民者的镇压。1926年2月11、12连续两日，「东亚日报」发表韩国民族史学家崔南善的文章「檀君否认图片妄」，批评日本学者抹杀檀君朝鲜的历史。(92)
+        随后崔南善在1926年12月9日至12日，在「东亚日报」上发表了一篇题为「坛君图片表诚」，对檀君在韩国历史上、精神上、文化上的重要地位予以详细的讨论，盛赞檀君的功绩。(93)
+        与之同时，「东亚日报」、「朝鲜日报」都发表了许多与檀君相关的资料与消息。在日本殖民时期，因为国家灭亡，民族生存面临着极大的威胁，檀君信仰成为韩国民众抗击日本殖民者的一种重要的凝聚力和民族精神的象征，得到极大的发展。箕子因为系来自中国的，对于韩国的民族独立并没有多大的凝聚作用，在追求民族独立自主的二十世纪，箕子信仰最终被韩国抛弃了。光复以后，韩半岛南北分离，但都认同檀君是民族的始祖，檀君信仰成为民族独立一种至高无上的形象。韩国官方用很多的方式强化了檀君作为始祖的地位。大韩民国成立以后，1948年8月5日第一次国会，就讨论纪年要用檀纪，以檀君诞生的公元前2333年为檀纪元年，由此下推。(94)
+        经过几次会议的讨论，于9月9日，通过采用檀纪的法律草案。9月28日，最后颁布大韩民国的公用年号为檀君纪元。一直到1961年12月，韩国国会才通过法律，改檀君纪元为西历纪元，用西历。1949年，又通过法律，宣布10月3日为开天节（将原来的11月3日提早了一个月），与三一节（3月1日）、宪法公布纪念日（7月17日）、光复节（8月15日）共同作为韩国民众的公共国庆日。同时朝鲜半岛南北双方都修缮传说与檀君有关的遗迹。(95)</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        总之，进入20世纪，在西方与日本的冲击下，随着中华世界体系的瓦解，以民族独立解放作为历史的主旋律，韩国对于古史的认同也发生了根本的变化，原来被斥为荒诞不经的故事被奉为历史，因为它主导着民族精神。而发源于中华世界体系的箕子信仰与崇拜被弃之不顾了，成为一个“他者”，不再是韩国历史的一部分了。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <b><font size="3">五、结语</font></b>
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 英国历史学家爱德华·霍列特·卡尔（Edward
+        Hallett
+        Carr，）说过：“历史是历史学家跟他的事实之间相互作用的连续不断的过程，是现在跟过去之间的永无止境的问答交谈。”(96)
+        现在跟过去永无休止的对话与交谈，从而将过去的历史可以作出许多完全不同的解释。对韩国古史中檀君朝鲜与箕子朝鲜历史的解释，从肯定到否定，此消彼长，正可以看出现实的需求。正是现实中的某种要求从而关注历史上的某些侧面。正如文章开头提到的“历史三调”，在檀君朝鲜与箕子朝鲜的问题上，也完全适用。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        作为历史的真相，无论是檀君朝鲜还是箕子朝鲜，因为年代的久远、资料的匮乏，都无法真正获得。因为口耳的相传，历代“层累”的堆积，使得韩国古史完全失去了其本来面目，这样来自现实的需求，就决定了对古史的解释。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        在以明朝为中心的中华世界体系之下，朝鲜王朝作为中华世界体系的“边缘”，箕子朝鲜与箕子信仰，给朝鲜王朝提供了一个提高自身地位的重要保证，也是朝鲜加强与中华世界关系的重要媒介。因而对于箕子朝鲜历史的定位、对箕子的祭祀，甚至后裔的发现并予以重用，都是企图强化其在中华世界中的地位，进而强化其本国的正统地位。这个时候，对于檀君朝鲜的传说，朝鲜儒林还能正视其弱点，即便是认同檀君作为始祖的地位，但也批评最早的文字记载，直接斥之为荒诞不经之说。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div>
+      <font size="3"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        在西方和日本势力的冲击下，中华世界解体，朝鲜与中国的宗藩关系也随之被打破。面对着列强的侵略，民族危亡之际，檀君作为民族始祖的地位陡然重要起来，成为大韩民族加强凝聚力和民族精神的灵魂，故而受到极大的尊崇，箕子则与此毫不相干，因而受到贬斥，最终被抛弃。因此，当下意识与民族认同成为朝鲜塑造与解释古史的最重要动机，这或许是我们审视朝鲜半岛古代根基历史的一个重要视角。</font
+      >
+    </div>
+    <div><font size="3"></font>&nbsp;</div>
+    <div><font size="3">复旦学报2008年05期</font></div>
+    <div><font size="3">叙拉古之惑</font></div>
+  </div>
+</td>

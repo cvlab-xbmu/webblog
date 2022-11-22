@@ -2,8 +2,16 @@ import { Footer } from "@/components/Footer";
 import { Main } from "@/components/Layout";
 import { NavPlain } from "@/components/NavPlain";
 import { PostReader } from "@/components/PostReader";
+import { MDXRemoteProps } from "next-mdx-remote";
 import Head from "next/head";
-export const PostPage = (props: { text: string }) => {
+
+export const PostPage = (props: {
+  postTitle: string,
+  postSubtitle?: string,
+  postCitation?: string,
+  postAuthor?: string,
+  content: MDXRemoteProps
+}) => {
   return (
     <div className="">
       <Head>
@@ -13,7 +21,7 @@ export const PostPage = (props: { text: string }) => {
       </Head>
       <NavPlain />
       <Main>
-        <PostReader text={props.text} />
+        <PostReader title={props.postTitle} content={props.content} subtitle={props.postSubtitle} citation={props.postCitation} />
       </Main>
       <Footer />
     </div>

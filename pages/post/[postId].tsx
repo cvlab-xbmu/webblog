@@ -1,15 +1,35 @@
-import { PostPage } from "@/templates/PostPage";
-import fs from "fs";
+import { getAllPostIds, getPostData } from '@/lib/post';
+import { MDXRemoteProps } from 'next-mdx-remote';
+import { PostPage } from '@/templates/PostPage';
+import type { GetStaticPaths, GetStaticProps } from "next";
 
-export default function Post(props: { text: string }) {
-  return <PostPage text={props.text} />;
+interface Props {
+  postData: {
+    title: string;
+    date: string;
+    content: MDXRemoteProps;
+  };
 }
 
-export const getServerSideProps = async () => {
-  const aa = fs.readFileSync("posts/test.html", { encoding: "utf-8" });
+export default function Post({ postData }: Props) {
+  return (
+    <PostPage postTitle={postData.title} content={postData.content} />
+  );
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = getAllPostIds();
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const postData = await getPostData(params!.postId as string);
   return {
     props: {
-      text: aa,
+      postData,
     },
   };
 };
