@@ -6,6 +6,7 @@
         "okaidia",
         "Primjs",
         "prismjs",
+        "rehype",
         "sqlstring",
         "Srcs",
         "tailwindcss",

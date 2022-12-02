@@ -10,8 +10,21 @@ export const WebsiteConfigure = {
     github: "https://github.com/cvlab-xbmu/",
     gitee: "",
   },
+
+  Headline: {
+    title: "故宫研究院漆器研究所召开项目启动会",
+    url: "https://www.dpm.org.cn/classify_detail/258201.html",
+    citation:
+      "2022年9月，故宫研究院漆器研究所项目启动会在文保科技部召开。故宫漆器研究所名誉所长张荣研究馆员，文保科技部于子勇主任、雷勇副主任、屈峰副主任，文物标准化研究所曲亮主任，器物部韩倩副主任，来自宫廷历史部、器物部、故宫学研究所的研究人员，文保科技部及文物标准化研究所修复、科学检测人员，图书馆古籍研究人员等二十余位专家学者参加了此次启动会议。",
+  },
+
   /** 首页着陆页轮播 */
-  landingImagesSrc: [],
+  landingImagesSrc: [
+    "/images/home-bg1.jpg",
+    "/images/home-bg2.webp",
+    "/images/home-bg3.jpg",
+    "/images/home-bg4.jpg",
+  ],
   /** 所有科研博客的栏目 */
   columns: [
     {
@@ -42,6 +55,7 @@ export const WebsiteConfigure = {
   teamCard: {},
 
   projectCard: {
+    imageUrl:"",
     introduction:
       "清华大学宽带电力线通信(PowerlineCommunication，PLC)技术方案和系统设计。与已有的方案不同的是:本方案的核心技术将采用具有自主知识产权的时域同步正交频分复用(TDS一OFDM)技术，在保证技术先进性的同时，为国内相关企业提供一定的技术保障壁垒，在产业传输之初能够有效避免国外公司的竞争。清华大学在与美国波音公司合作进行的研究中，已经完成了系统方案设计、关键技术研究、系统的FPGA验证。目前，正在与国家电网合作进行PLC组网技术研发。本项目合作方向包括PLC专用芯片设计、PLC家庭网络产品等。",
   },

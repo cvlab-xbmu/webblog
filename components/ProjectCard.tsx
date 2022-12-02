@@ -2,7 +2,13 @@ import ImBg from "@/assets/im-bg.png";
 import { WebsiteConfigure } from "@/config/website.config";
 import { Button } from "@arco-design/web-react";
 
-export const ProjectCard = () => {
+export const ProjectCard = (
+  props: {
+    introduction: string;
+    imageUrl: string;
+    github?: string;
+    gitee?: string;
+  }) => {
   return (
     <div className="border-t-2 border-b-2 border-amber-700 py-2">
       <div className="my-2 flex justify-center">
@@ -20,16 +26,16 @@ export const ProjectCard = () => {
       </div>
       <div className="my-2 flex justify-center">
         <img
-          src={"/images/project-intro-bg.png"}
+          src={props.imageUrl}
           className="w-full aspect-5/1 rounded-md object-cover"
           alt="xbmu-cvlab-project"
         />
       </div>
-      <p className="text-lg">{WebsiteConfigure.projectCard.introduction}</p>
+      <p className="text-lg">{props.introduction}</p>
       <div className="my-5 flex justify-end">
-        <Button type="primary" size="large" className="mx-3">{"开始尝试"}</Button>
-        <Button size="large" className="mx-3" href={WebsiteConfigure.openSourceLink.github}>{"Github"}</Button>
-        <Button size="large" className="mx-3" href={WebsiteConfigure.openSourceLink.gitee}>{"Gitee"}</Button>
+        <Button type="primary" size="large" className="mx-3" href="/display">{"开始尝试"}</Button>
+        {props.github && <Button size="large" className="mx-3" href={props.github}>{"Github"}</Button>}
+        {props.gitee && <Button size="large" className="mx-3" href={props.gitee}>{"Gitee"}</Button>}
       </div>
     </div>
   );

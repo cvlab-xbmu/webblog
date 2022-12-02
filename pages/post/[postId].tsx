@@ -1,6 +1,6 @@
-import { getAllPostIds, getPostData } from '@/lib/post';
+import { getAllPostIds, getPostData } from '@/lib/markdown';
 import { MDXRemoteProps } from 'next-mdx-remote';
-import { PostPage } from '@/templates/PostPage';
+import { PostPage } from '@/templates/PostReaderPage';
 import type { GetStaticPaths, GetStaticProps } from "next";
 
 interface Props {
